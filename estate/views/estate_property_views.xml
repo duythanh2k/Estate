@@ -1,0 +1,133 @@
+<odoo>
+
+  <!-- SEARCH -->
+  <record id="estate_property_view_search" model="ir.ui.view">
+  	<field name="name">estate.property.search</field>
+  	<field name="model">estate.property</field>
+  	<field name="arch" type="xml">
+  		<search string="Search">
+  			<field name="name" />
+  			<field name='tag_ids' />
+  			<field name="postcode" />
+  			<field name="expected_price" />
+  			<field name="bedrooms" />
+  			<field name="living_area" />
+  			<field name="facades" />
+  			<separator/>
+  			<filter string="Available" name="state" 
+  				domain="['|', ('active', '=', False), ('active', '=', True),
+  						'|', ('state', '=', 'new'), ('state', '=', 'offer_received')]" />
+  			<filter string="Postcode" name="postcode" context="{'group_by': 'state'}" />
+  		</search>
+  	</field>
+  </record>
+  
+  <!-- LIST (TREE) -->
+  <record id="estate_property_view_tree" model="ir.ui.view">
+  	<field name="name">estate.property.tree</field>
+  	<field name="model">estate.property</field>
+  	<field name="arch" type="xml">
+  		<tree string="Estates">
+  			<field name="name" />
+  			<field name='tag_ids' widget="many2many_tags" />
+  			<field name="property_type_id" />
+  			<field name="postcode" />
+  			<field name="bedrooms" />
+  			<field name="living_area" />
+  			<field name="expected_price" />
+  			<field name="selling_price" />
+  			<field name="date_availability" />
+  		</tree>
+  	</field>
+  </record>
+  
+  <!-- FORM -->
+  <record id="estate_property_view_form" model="ir.ui.view">
+  	<field name="name">estate.property.form</field>
+  	<field name="model">estate.property</field>
+  	<field name="arch" type="xml">
+  		<form string="Estate">
+  			<sheet>
+  				<group>
+  					<div class="oe_title">
+  						<label for="name" class="oe_edit_only" string="Title" />
+  						<h1>
+                            <field name="name"/>
+                        </h1>
+                        <field name='tag_ids' widget="many2many_tags" />
+  					</div>
+  					<seperator colspan="2" />
+  					<group colspan="2">
+	  					<group>
+	  						<field name="property_type_id" />
+		  					<field name="postcode" />
+		  					<field name="date_availability" />
+	  					</group>
+	  					<group>
+	  						<field name="expected_price" />
+	  						<field name="best_price" />
+		  					<field name="selling_price" />
+	  					</group>
+  					</group>
+	  				
+	  				<seperator colspan="2" />
+  					  					
+  					<group colspan="2">
+  						<notebook>
+	  						<page string="Description">
+  								<seperator colspan="2" />
+  								<group>
+  									<group>
+  										<field name="description" />
+  										<field name="bedrooms" />
+  										<field name="living_area" />
+			  							<field name="facades" />
+			  							<field name="garage" />
+			  							<field name="garden" />
+			  							<field name="garden_area" />
+			  							<field name="garden_orientation" />
+			  							<field name="active" class="oe_create_only oe_edit_only" />
+			  							<field name="state" class="oe_create_only oe_edit_only" />
+			  							<field name="total_area" />
+			  						</group>
+		  						</group>
+	  						</page>
+	  						
+	  						<page string="Offers">
+	  							<seperator colspan="2" />
+	  							<group>
+	  								<group colspan="2">
+	  									<field name="offer_ids" />
+	  								</group>
+	  							</group>
+	  						</page>
+	  						
+	  						<page string="Other Info">
+	  							<seperator colspan="2" />
+	  							<group>
+	  								<group>
+	  									<field name="salesperson" />
+	  									<field name="buyer" />
+	  								</group>
+	  							</group>
+	  						</page>
+	  					</notebook>
+  					</group>
+  				</group>
+  			</sheet>
+  		</form>
+  	</field>
+  </record>
+  
+  <!-- ACTION -->
+  <record id="estate_property_action" model="ir.actions.act_window">
+  	<field name="name">Properties</field>
+  	<field name="res_model">estate.property</field>
+  	<field name="view_mode">tree,form</field>
+  	<field name="help" type="html">
+  		<p>Real estate cannot be lost or stolen, nor can it be carried away.</p>
+  		<p>Landlords grow rich in their sleep.</p>
+  	</field>
+  </record>
+  
+</odoo>
