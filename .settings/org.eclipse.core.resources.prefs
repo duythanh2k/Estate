@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+encoding//estate/__init__.py=utf-8
+encoding//estate/models/__init__.py=utf-8
+encoding//estate/models/estate_property.py=utf-8
+encoding//estate/models/estate_property_offer.py=utf-8
+encoding//estate/models/estate_property_tag.py=utf-8
+encoding//estate/models/estate_property_type.py=utf-8
+encoding//estate/models/res_users.py=utf-8
+encoding//estate_account/__init__.py=utf-8
+encoding//estate_account/models/__init__.py=utf-8
+encoding//estate_account/models/estate_property.py=utf-8
