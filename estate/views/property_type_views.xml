@@ -16,11 +16,31 @@
 		<field name='arch' type='xml'>
 			<form string='Property Type'>
 				<sheet>
+					<!-- Object type for linking button -->
+					<!-- Button that pointing to the estate.property.offer and display all offers -->
+					<div class="o_not_full oe_button_box">
+						<button type='action' name='%(estate.property_offer_action)d' 
+						icon='fa-money' class='btn o_stat_button oe_stat_button'>
+							<field name='offer_count' widget="statinfo" />
+						</button>
+					</div>
+					
 					<div class='oe_title'>
 						<label for='name' class='oe_edit_only' string="Title" />
 						<h1>
 							<field name='name' />
 						</h1>
+						<notebook>
+							<page string='Properties'>
+								<field name='property_ids'>
+									<tree string='Properties' editable='top'>
+										<field name='name' />
+										<field name='expected_price' />
+										<field name='state' />
+									</tree>
+								</field>
+							</page>
+						</notebook>
 					</div>
 				</sheet>
 			</form>
@@ -32,6 +52,7 @@
 		<field name='model'>estate.property.type</field>
 		<field name='arch' type='xml'>
 			<tree string='Property Types'>
+				<field name="sequence" widget="handle"/>
 				<field name='name' />
 			</tree>
 		</field>

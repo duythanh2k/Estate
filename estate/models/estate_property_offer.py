@@ -9,6 +9,7 @@ from odoo.exceptions import UserError
 class EstatePropertyOffer(models.Model):
     _name = 'estate.property.offer'
     _description = 'Property offer'
+    _order = 'price desc'
     
     price = fields.Float(string='Price')
     status = fields.Selection(
@@ -18,7 +19,12 @@ class EstatePropertyOffer(models.Model):
     property_id = fields.Many2one('estate.property', string='Property', required=True)
     validity = fields.Integer(string='Validity (days)', default=7)
     date_deadline = fields.Date(compute='_compute_date', 
-                                inverse='_inverse_date', string='Deadline', store=True)
+                                inverse='_inverse_date', 
+                                string='Deadline', store=True)
+#    Related fields
+    property_type_id = fields.Many2one('estate.property.type', 
+                                       related='property_id.property_type_id', 
+                                       string='Property Type', store=True)
     
     
 #    SQL Constraints
@@ -69,7 +75,8 @@ class EstatePropertyOffer(models.Model):
         current_property = self.env['estate.property'].browse(vals['property_id']);
         if vals['price'] < current_property.best_price:
             raise UserError("The offer must be higher than {}.".format(current_property.best_price))
-        else:
+        if current_property.state == "new":
             current_property.state = "offer_received"
-            return super().create(vals)
+            
+        return super().create(vals)
     

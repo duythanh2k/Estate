@@ -10,7 +10,7 @@ from odoo.tools.float_utils import float_is_zero
 class EstateProperty(models.Model):
     _name = 'estate.property'
     _description = 'my new first database ORM created!'
-    _order = 'date_availability asc, name'
+    _order = 'id desc'
     
 #    Basic Attributes
     name = fields.Char(string='Title', required=True)
@@ -83,10 +83,11 @@ class EstateProperty(models.Model):
             
     @api.depends('offer_ids.price')
     def _compute_max(self):
-        if self.offer_ids:
-            self.best_price = max(self.mapped('offer_ids.price'))
-        else:
-            self.best_price = 0
+        for record in self:
+            if record.offer_ids:
+                record.best_price = max(record.mapped('offer_ids.price'))
+            else:
+                record.best_price = 0
                         
 #    Define onchange function
     @api.onchange('garden')
@@ -108,6 +109,8 @@ class EstateProperty(models.Model):
                 raise UserError("Canceled properties cannot be sold.")
             elif record.state == "sold":
                 raise UserError("Property has already sold.")
+            elif record.state != "offer_accepted":
+                raise UserError("No offer has accepted. Cannot sold.")
             else:
                 record.state = "sold"
         return True
@@ -132,4 +135,11 @@ class EstateProperty(models.Model):
                 raise UserError("Only new and canceled properties can be delete.")
             # else:
             #     return super().unlink(record)
+            
+            
+    #    records.filtered(age_greater_30)
+    def age_greater_30(self):
+        for record in self:
+            if record.age > 30:
+                return record
     
