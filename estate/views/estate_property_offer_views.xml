@@ -1,0 +1,47 @@
+<odoo>
+  <data>
+    <record id="estate_property_offer_action" model="ir.actions.act_window">
+      <field name="name">Offers</field>
+      <field name="res_model">estate.property.offer</field>
+      <field name="view_mode">tree,form</field>
+      <!-- add a domain that defines property_type_id as equal to the active_id (the current record) -->
+      <field name="domain">[('property_type_id', '=', active_id)]</field>
+    </record>
+
+    <record id="estate_property_offer_view_form" model="ir.ui.view">
+      <field name="name">estate.property.offer.form</field>
+      <field name="model">estate.property.offer</field>
+      <field name="arch" type="xml">
+        <form string="Property Offers">
+          <sheet>
+            <group>
+              <field name="price" />
+              <field name="partner_id" />
+              <field name="validity" />
+              <field name="date_deadline" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="estate_property_offer_view_tree" model="ir.ui.view">
+      <field name="name">estate.property.offer.tree</field>
+      <field name="model">estate.property.offer</field>
+      <field name="arch" type="xml">
+        <tree string="Property Offers" editable="top"
+        decoration-success="status=='accepted'" decoration-danger="status=='refused'">
+          <field name="price" />
+          <field name="partner_id" />
+          <field name="validity" />
+          <field name="date_deadline" />
+          <button name="action_accept" type="object" icon="fa-check" string="Accept"
+                  attrs="{'invisible': ['|', ('status', '=', 'accepted'), ('status', '=', 'refused')]}" />
+          <button name="action_refuse" type="object" icon="fa-times" string="Refuse"
+                  attrs="{'invisible': ['|', ('status', '=', 'accepted'), ('status', '=', 'refused')]}" />
+          <field name='status' invisible="1" />
+        </tree>
+      </field>
+    </record>
+  </data>
+</odoo>

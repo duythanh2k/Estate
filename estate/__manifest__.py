@@ -1,77 +1,23 @@
+# -*- coding: utf-8 -*-
 {
-    'name': "estate",
-	'name_vi_VN': "estate",
+    'name': "Real Estate",
+
     'summary': """
-Short (1 phrase/line) summary of the module's purpose, used as
-subtitle on modules listing or apps.openerp.com""",
-    'summary_vi_VN': """
-Mô tả ngắn gọn bằng tiếng Việt (1 câu, 1 dòng) về mục đích của module
-""",
+        Short (1 phrase/line) summary of the module's purpose, used as
+        subtitle on modules listing or apps.openerp.com""",
 
     'description': """
-What it does
-============
-Long description of module's purpose
-
-Key Features
-============
-1. Feature 1
-
-   * Sub-Feature 1
-   * Sub-Feature 2
-
-     * Sub-sub-feature 1
-     * Sub-sub-feature 2
-
-2. Feature 2
-
-   * Sub-Feature 1
-   * Sub-Feature 2
-
-Editions Supported
-==================
-1. Community Edition
-2. Enterprise Edition
-
-    """,
-    'description_vi_VN': """
-Ứng dụng này làm gì
-===================
-Mô tả chi tiết về module
-
-Tính năng chính
-===============
-1. Tính năng 1
-
-   * Tính năng Phụ 1
-   * Tính năng Phụ 2
-
-     * Tính năng Phụ Chi tiết 1
-     * Tính năng Phụ Chi tiết 2
-
-2. Tính năng 2
-
-   * Tính năng Phụ 1
-   * Tính năng Phụ 2
-
-Ấn bản được Hỗ trợ
-==================
-1. Ấn bản Community
-2. Ấn bản Enterprise
-
+        Long description of module's purpose
     """,
 
-    'author': "Viindoo",
-    'website': "https://viindoo.com",
-    'live_test_url': "https://v15demo-int.erponline.vn",
-    'live_test_url_vi_VN': "https://v15demo-vn.erponline.vn",
-    'support': "apps.support@viindoo.com",
+    'author': "My Company",
+    'website': "https://www.yourcompany.com",
 
     # Categories can be used to filter modules in modules listing
-    # Check https://github.com/Viindoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
+    # Check https://github.com/odoo/odoo/blob/16.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Uncategorized',
-    'version': '0.1.0',
+    'version': '0.1',
 
     # any module necessary for this one to work correctly
     'depends': ['base'],
@@ -79,19 +25,12 @@ Tính năng chính
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/property_offer_views.xml',
-        'views/property_tag_views.xml',
-        'views/property_type_views.xml',
         'views/estate_property_views.xml',
+        'views/estate_property_type_views.xml',
+        'views/estate_property_tag_views.xml',
+        'views/estate_property_offer_views.xml',
         'views/res_users_views.xml',
         'views/estate_menus.xml',
-        # 'views/templates.xml',
     ],
-    # only loaded in demonstration mode
-    'installable': True,
-    'application': False,
-    'auto_install': False,
-    'price': 99.9,
-    'currency': 'EUR',
     'license': 'OPL-1',
 }
